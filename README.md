@@ -5,5 +5,7 @@ This is the web server behind an internet of things smart dumbell that gamifies 
 
 Made at MakeMIT 2016 by Jennifer Zhang, Vahid Fazel-Rezai, and Vlad Naculiscu.
 
+<sub>\* work in progress</sub>
+
 ## License
 MIT License
