@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -62,5 +64,9 @@ app.use(function(err, req, res, next) {
     });
 });
 
+app.listen(process.env.PORT, function() {
+  console.log('Smartbell server started!');  
+  console.log('Listening on port '+process.env.PORT);  
+});
 
 module.exports = app;
