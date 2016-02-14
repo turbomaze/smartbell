@@ -72,4 +72,17 @@ userSchema.methods.closeOpenSet = function(dumbbellId, cb) {
 	});
 }
 
+userSchema.methods.getRepsAsList = function(dumbbellId, cb) {
+	var allSets = []
+	this.sets.forEach(function(s) {
+		allSets.concat(s); // List of all the user's Reps
+	});
+
+	var allReps = allSets.map(function(i, rep, allSets) {
+		return [i, rep.quality, rep.duration]
+	});
+
+	cb(null, allReps);
+}
+
 module.exports = mongoose.model("User", userSchema);
