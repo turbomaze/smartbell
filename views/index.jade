@@ -77,7 +77,7 @@ html
       });
 
       setInterval(function() {
-        $.post("http://localhost:3000/users/1931/reps", {thing: Math.random()}, function(data) {
+        $.post("http://52.91.248.203:3000/users/1931/reps", {thing: Math.random()}, function(data) {
           var svgEl = document.getElementById('plot-svg');
           document.getElementById('plot').removeChild(svgEl);
           plot(data.data);
