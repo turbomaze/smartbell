@@ -11,7 +11,7 @@ var repSchema = mongoose.Schema({
 */
 repSchema.methods.createRep = function(quality, duration, cb) {
 	this.create({
-		quality: quality
+		quality: quality,
 		duration: duration,
 	}, cb);
 };

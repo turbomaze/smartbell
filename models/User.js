@@ -5,8 +5,8 @@ var Set = require('../models/Set.js');
 
 var userSchema = mongoose.Schema({
 	username: {type: 'String', required: true},
-	dumbbellId: {type: 'String', required: true },
-	sets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Set', required: false }]
+	dumbbellId: {type: 'Number', required: true },
+	sets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Set', required: false }],
 });
 
 /*
@@ -35,7 +35,7 @@ userSchema.methods.createSet = function(dumbbellId, cb) {
 	});
 }
 
-userSchema.methods.checkForOpenSet = function(dumbbellId, cb) {
+userSchema.statics.checkForOpenSet = function(dumbbellId, cb) {
 
 	this.findOne({ dumbbellId: dumbbellId }, function(error, user) {
 		if (error) {

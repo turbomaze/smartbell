@@ -15,6 +15,8 @@ var Rep = require('../models/Rep.js')
 */
 router.post('/start', function(req, res) {
 
+  console.log("hi");
+
   User.checkForOpenSet(
     req.body.dumbbellId,
     function(error) {
@@ -53,9 +55,11 @@ router.post('/rep', function(req, res) {
     function(error, set) {
       if (error) {
         // Error, no open set.
+        console.log("error");
         return next(error);
 
       } else {
+        console.log("success");
         // There is an open set!
         // Add the rep to it.
         set.addRep(

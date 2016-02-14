@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var setSchema = mongoose.Schema({
-	dumbbellId: {type: 'String', required: true },
+	dumbbellId: {type: 'Number', required: true },
 	reps: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rep', required: false }],
 	open: { type: Boolean, required: true },
 });
