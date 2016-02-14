@@ -20,6 +20,7 @@ router.post('/add', function(req, res) {
   reps.push([counter, quality]);
   counter += 1;
   console.log("reps", reps);
+  res.send(200);
 
 });
 
@@ -29,6 +30,8 @@ router.post('/add', function(req, res) {
 
 router.post('/remove', function(req, res) {
 	reps = []
+	 res.send(200);
+
 });
 
 router.post('/reps', function(req, res) {
