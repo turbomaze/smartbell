@@ -5,4 +5,15 @@ var repSchema = mongoose.Schema({
 	duration: { type: 'Number', required: true },
 });
 
+/**
+* Creates Rep object
+* @param username: username of the owner of this Set
+*/
+repSchema.statics.createRep = function(quality, duration, cb) {
+	this.create({
+		quality: quality
+		duration: duration,
+	}, cb);
+};
+
 module.exports = mongoose.model("Rep", repSchema);
