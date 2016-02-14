@@ -7,9 +7,8 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  var val = parseFloat(req.body.thing);
-  console.log(val);
-  res.send(''+(val*val)+'\n');
+  console.log(req.header('data'));
+  res.send(Math.random());
 });
 
 module.exports = router;
