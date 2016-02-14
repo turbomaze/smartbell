@@ -1,0 +1,225 @@
+html
+  head
+    // from http://bl.ocks.org/mbostock/3883245
+    title User
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    script(src='//d3js.org/d3.v3.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+    script.
+      var x, y, svg, xAxis, yAxis, line;
+      var margin = {top: 10, right: 30, bottom: 70, left: 40};
+      width = 360 - margin.left - margin.right || w,
+      height = 240 - margin.top - margin.bottom || h;
+      function plot(data, w, h){
+        x = d3.scale.linear()
+        .range([0, width]);
+        y = d3.scale.linear()
+        .range([height, 0]);
+
+        xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+        yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+        line = d3.svg.line()
+        .x(function(d) { return x(d[0]); })
+        .y(function(d) { return y(d[1]); });
+
+        svg = d3.select("#plot").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("id", "plot-svg")
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        x.domain(d3.extent(data, function(d) { return d[0]; }));
+        y.domain(d3.extent(data, function(d) { return d[1]; }));
+
+        svg.append("g")
+        .attr("class", "x axis")
+        .style("stroke", "white")
+        .style("fill", "white")
+        .style("font-size", "13px")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .append("text")
+        .attr("x", 19)
+        .attr("y", 37)
+        .style("stroke", "white")
+        .text("Rep #");
+
+        svg.append("g")
+        .attr("class", "y axis")
+        .style("stroke", "white")
+        .style("fill", "white")
+        .style("font-size", "13px")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 7)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .style("stroke", "white")
+        .text("Quality");
+
+        svg.append("path")
+        .datum(data)
+        .attr("class", "line")
+        .style("stroke", "#FFCA41")
+        .attr("d", line);
+      }
+
+      window.addEventListener('load', function() {
+        plot([[1,1]]);
+      });
+
+      setInterval(function() {
+        $.post("http://localhost:3000/users/1931/reps", {thing: Math.random()}, function(data) {
+          var svgEl = document.getElementById('plot-svg');
+          document.getElementById('plot').removeChild(svgEl);
+          plot(data.data);
+        });
+      }, 500);
+
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css')
+
+    style.
+      html, body {
+      margin: 0;
+      padding: 0;
+      }
+      body {
+        font-family: Open Sans, sans-serif;
+        background-color: #7C92CA; 
+        color: white;
+      }
+      .content plot {
+        font-size: 12px
+        color: white;
+      }
+      .axis path,
+      .axis line {
+      fill: none;
+      stroke: #FFF;
+      shape-rendering: crispEdges;
+      }
+      .x.axis path {
+      }
+      .line {
+      fill: none;
+      stroke: white;
+      stroke-width: 1.5px;
+      }
+
+      #plot {
+      margin: 0 auto;
+      text-align: center;
+      background: #5372C2;
+      width: 100%;
+      margin-bottom: 0;
+      }
+
+      h1 {
+      margin-top: 2rem;
+      font-size: 3rem;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      margin-bottom: 0;
+      }
+
+      h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: white;
+      text-align: left;
+      margin-bottom: 0rem;
+      padding-left: 2rem;
+      }
+
+      .makeyellow {
+      color: #FFCA41;
+      }
+
+      hr {
+      width: 34%;
+      border-color: white;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      margin-left: auto;
+      maring-right: auto;
+      }
+
+      .feedcont {
+      background-color: white;
+      padding-bottom: 1rem;
+      }
+      .feed {
+      color: #7C92CA;
+      padding: 0rem 4rem 1rem 4rem;
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      }
+
+      .feeditem {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      }
+      h2.feedtitle {
+      margin-top: 0;
+      padding-top: 3rem;
+      color: #7C92CA;
+      background-color: white;
+      margin-bottom: 0;
+      padding-bottom: 1rem;
+      }
+
+      #plot h2 {
+      padding-top: 2rem;
+      }
+
+      .footer {
+      background-color: #01285E;
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      padding-top: 2rem;
+      padding-bottom: 5rem;
+      }
+      .feedblurb {
+      color: #CFCFCF;
+      padding-left: 2.25rem;
+      font-size: 1.25rem;
+      }
+
+  body
+
+    .content
+      h1 Smart
+        span.makeyellow bell
+      #plot
+        h2 Lifts
+
+      .feedcont
+        h2.feedtitle Feed
+        i.feedblurb See your friends' workouts!
+        ul.feed
+          li.feeditem
+            b Jennifer 
+            | just finished 30 reps!
+          li.feeditem
+            b Vahid 
+            | just advanced on to 12lb weights! 
+          li.feeditem
+            b Vlad 
+            | successful did 50 reps better than ever!
+  
+      .footer
+        span Made with love @ MakeMIT 2016
