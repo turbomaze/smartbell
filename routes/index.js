@@ -23,6 +23,14 @@ router.post('/add', function(req, res) {
 
 });
 
+// router.post('/add2', function(req, res) {
+// 	var q = 
+// });
+
+router.post('/remove', function(req, res) {
+	reps = []
+});
+
 router.post('/reps', function(req, res) {
 
   res.send({"data": reps});
