@@ -9,7 +9,7 @@ var repSchema = mongoose.Schema({
 * Creates Rep object
 * @param username: username of the owner of this Set
 */
-repSchema.statics.createRep = function(quality, duration, cb) {
+repSchema.methods.createRep = function(quality, duration, cb) {
 	this.create({
 		quality: quality
 		duration: duration,
